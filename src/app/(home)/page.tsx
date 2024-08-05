@@ -18,9 +18,9 @@ export default async function Home() {
 
   return (
     <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-white">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#F3EAE5]/50">
         Duty Rate
-        <CommandSearch commands={commands} className="w-1/2"/>
+        <CommandSearch commands={commands} className="w-1/2" />
       </main>
     </HydrateClient>
   );

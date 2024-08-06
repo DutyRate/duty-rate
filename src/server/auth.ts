@@ -40,23 +40,6 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.email = user.email!;
-      }
-
-      return token;
-    },
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
-  },
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
     CredentialsProvider({
@@ -67,10 +50,15 @@ export const authOptions: NextAuthOptions = {
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        username: {
+          label: "Username",
+          type: "text",
+          placeholder: "jsmith@gmail.com",
+        },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials, _req) {
+        console.log(credentials);
         const user = {
           id: "",
           name: "Hanif",
@@ -100,10 +88,26 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
-  // adapter: MongoDBAdapter(clientPromise) as Adapter,
-  pages: {
-    signIn: "/login",
-    error: "/login",
+  // pages: {
+  //   signIn: "/login",
+  //   error: "/login",
+  // },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email!;
+      }
+console
+      return token;
+    },
+    session: ({ session, user }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: user.id,
+      },
+    }),
   },
   session: {
     strategy: "jwt",

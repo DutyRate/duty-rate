@@ -26,13 +26,13 @@ export default function Nav() {
   return (
     <>
       <NavigationMenu className="fixed inset-x-0 top-0 z-50 w-screen bg-transparent">
-        <NavigationMenuList className="flex h-14 w-screen items-center justify-between p-4">
+        <NavigationMenuList className="flex h-14 w-screen items-center justify-between p-12">
           <Link href="/" className="flex items-center" prefetch={false}>
             <div className="flex items-center justify-start gap-4">
               <Image src="/icon.png" width={30} height={30} alt="logo" />
-              <h1 className="text-xl font-medium text-black">SEMRA</h1>
+              <h1 className="text-xl font-medium text-black">Duty Rate</h1>
             </div>
-            <span className="sr-only">Semra home</span>
+            <span className="sr-only">Duty rate</span>
           </Link>
 
           <div className="hidden gap-4 md:flex">

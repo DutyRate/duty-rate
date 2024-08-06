@@ -23,10 +23,11 @@ export default function CommandSearch({ commands, className }: ICommandProps) {
     : [];
 
   return (
-    <Command className={`rounded-lg border shadow-md ${className}}`}>
+    <Command className={`rounded-[20px] shadow-sm ${className}}`}>
       <CommandInput
         placeholder="Type a command or search..."
         onValueChange={handleValueChange}
+        className="w-full"
       />
       {
         <CommandList>

@@ -10,6 +10,17 @@ const config = {
 	],
   prefix: "",
   theme: {
+    fontSize: {
+      xs: ['12px', '16px'],
+      sm: ['14px', '20px'],
+      base: ['16px', '24px'],
+      lg: ['20px', '28px'],
+      xl: ['24px', '32px'],
+      "2xl": ['32px', '40px'],
+      "3xl": ['40px', '48px'],
+      "4xl": ['48px', '56px'],
+      "5xl": ['64px', '72px'],
+    },
     container: {
       center: true,
       padding: "2rem",

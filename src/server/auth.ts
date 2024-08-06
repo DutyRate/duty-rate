@@ -98,7 +98,7 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.email = user.email!;
       }
-console
+console.log(user);
       return token;
     },
     session: ({ session, user }) => ({

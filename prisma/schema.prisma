@@ -15,12 +15,10 @@ datasource db {
 }
 
 model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    createdBy   User   @relation(fields: [createdById], references: [id])
+    id          Int      @id @default(autoincrement())
+    name        String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
     createdById String
 
     @@index([name])
@@ -62,8 +60,10 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
-    posts         Post[]
+    role          Int       @default(0)
 }
+
+// role 0 is for user and 1 is for admin
 
 model VerificationToken {
     identifier String
@@ -71,4 +71,37 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+// Custom Tables
+// enum SUtype{
+//     U
+//     U2
+//     KG
+//     LT
+//     LTCL
+//     TKH
+//     M3
+//     M2
+//     M
+//     CRT
+// }
+// When moving to Postgres, use Enums
+
+model RateTable {
+    id     Int    @id @default(autoincrement())
+
+    cet    Int    @unique
+    desc  String
+    // su  SUtype  @default(U) for migration to postgres
+    su     String @default("U")
+    duty   Float    @default(0)
+    vat    Float    @default(0)
+    lvy   Int    @default(0)
+    exc    Int    @default(0)
+    dov    DateTime 
+    pdf    Int    @default(0)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

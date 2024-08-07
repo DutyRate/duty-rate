@@ -4,8 +4,10 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import Nav from "../_components/nav";
+import Nav from "./_components/nav";
 import { Toaster } from "~/components/ui/sonner";
+
+import { getServerAuthSession } from "~/server/auth";
 
 export const metadata: Metadata = {
   title: "Duty rate",
@@ -13,16 +15,17 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const session = await getServerAuthSession();
   return (
     <html lang="en" className={`${GeistSans.variable} bg-[#F3EAE5]`}>
       <body>
         <TRPCReactProvider>
-          <Nav />
+          <Nav session={session}/>
           <Toaster richColors />
-          {children}
+            {children}
         </TRPCReactProvider>
       </body>
     </html>

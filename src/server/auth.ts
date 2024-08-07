@@ -12,7 +12,7 @@ import { env } from "~/env";
 import { db } from "~/server/db";
 import { JWT } from "next-auth/jwt";
 import { User } from "@prisma/client";
-
+import bcrypt from "bcrypt";
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -23,15 +23,16 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
+      role: number;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    // ...other properties
+    role: number;
+  }
 }
 
 /**
@@ -50,29 +51,40 @@ export const authOptions: NextAuthOptions = {
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: {
-          label: "Username",
+        email: {
+          label: "Email",
           type: "text",
           placeholder: "jsmith@gmail.com",
         },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, _req) {
-        console.log(credentials);
-        const user = {
-          id: "",
-          name: "Hanif",
-          email: "hanif@gmail.com",
-          emailVerified: new Date(),
-          image: "",
-          accounts: [],
-          sessions: [],
-          posts: [],
-        };
+        if (!credentials) return null;
+
+        const user = await db.user.findUnique({
+          where: {
+            email: credentials.email,
+          },
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            password: true,
+            role: true,
+            image: true,
+          },
+        });
+
+        const passwordMatch = await bcrypt.compare(
+          credentials.password,
+          user?.password as string,
+        );
+
+        if (!passwordMatch) throw new Error("Invalid password");
 
         // If no error and we have user data, return it
-        if (user) {
-          return user;
+        if (user && passwordMatch) {
+          return { ...user, password: "" };
         }
         // Return null if user data could not be retrieved
         return null;
@@ -88,26 +100,27 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
-  // pages: {
-  //   signIn: "/login",
-  //   error: "/login",
-  // },
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.email = user.email!;
+        token.role = user.role;
       }
-console.log(user);
       return token;
     },
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token._id as string;
+        session.user.email = token.email as string;
+        session.user.role = token.role as number;
+      }
+      return session;
+    },
   },
   session: {
     strategy: "jwt",

@@ -20,8 +20,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { siFacebook } from "simple-icons";
 import { MobileNav } from "./mobileNav";
 
-export default function Nav() {
+import { Session } from "next-auth";
+import { CircleUserIcon } from "lucide-react";
+
+export default function Nav({session}:{session:Session | null}) {
   const pathname = usePathname();
+    
   const router = useRouter();
   return (
     <>
@@ -37,15 +41,28 @@ export default function Nav() {
 
           <div className="hidden gap-4 md:flex">
             <NavigationMenuItem>
-              <Link href="/about" legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} ${
-                    pathname == "/about" && "text-semraGreen"
-                  }`}
-                >
-                  About
-                </NavigationMenuLink>
-              </Link>
+              {session ? (
+                <Link href="/" legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={`${navigationMenuTriggerStyle()} ${
+                      pathname == "/" && "text-semraGreen"
+                    }`}
+                  >
+                    <CircleUserIcon size={20} className="mr-2" />
+                    {session.user.email}
+                  </NavigationMenuLink>
+                </Link>
+              ) : (
+                <Link href="/login" legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={`${navigationMenuTriggerStyle()} ${
+                      pathname == "/login" && "text-semraGreen"
+                    }`}
+                  >
+                    Login
+                  </NavigationMenuLink>
+                </Link>
+              )}
             </NavigationMenuItem>
 
             <NavigationMenuItem>

@@ -18,9 +18,9 @@ export default async function Home() {
 
   return (
     <HydrateClient>
-      <main className="flex min-h-screen w-screen flex-col items-center justify-center bg-[#F3EAE5]/50">
+      <main className="flex min-h-screen w-screen flex-col items-center justify-center gap-10 bg-[#F3EAE5]/50">
         <NewsBadge />
-        <h2 className="text-5xl">Duty Rate</h2>
+        <h2 className="text-5xl ">Duty Rate</h2>
         <div className="w-2/5">
           <CommandSearch commands={commands} className="" />
         </div>

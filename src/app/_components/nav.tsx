@@ -42,10 +42,10 @@ export default function Nav({session}:{session:Session | null}) {
           <div className="hidden gap-4 md:flex">
             <NavigationMenuItem>
               {session ? (
-                <Link href="/" legacyBehavior passHref>
+                <Link href="/admin" legacyBehavior passHref>
                   <NavigationMenuLink
                     className={`${navigationMenuTriggerStyle()} ${
-                      pathname == "/" && "text-semraGreen"
+                      pathname == "/admin" && "text-semraGreen"
                     }`}
                   >
                     <CircleUserIcon size={20} className="mr-2" />
@@ -72,7 +72,7 @@ export default function Nav({session}:{session:Session | null}) {
                     pathname == "/events" && "text-semraGreen"
                   }`}
                 >
-                  Events
+                  Logistics
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
@@ -84,7 +84,31 @@ export default function Nav({session}:{session:Session | null}) {
                     pathname == "/contact" && "text-semraGreen"
                   } text-base`} //bg-[#F5F5F5]
                 >
-                  Contact us
+                  Clearing and forwarding agents
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <Link href="/contact" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={`${navigationMenuTriggerStyle()} ${
+                    pathname == "/contact" && "text-semraGreen"
+                  } text-base`} //bg-[#F5F5F5]
+                >
+                  Bonded warehouses
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <Link href="/contact" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={`${navigationMenuTriggerStyle()} ${
+                    pathname == "/contact" && "text-semraGreen"
+                  } text-base`} //bg-[#F5F5F5]
+                >
+                 Port facilities
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

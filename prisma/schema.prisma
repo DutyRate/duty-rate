@@ -98,10 +98,25 @@ model RateTable {
     su     String @default("U")
     duty   Float    @default(0)
     vat    Float    @default(0)
-    lvy   Int    @default(0)
+    lvy    Int    @default(0)
     exc    Int    @default(0)
     dov    DateTime 
     pdf    Int    @default(0)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model LogisticsTable {
+    id       Int    @id @default(autoincrement())
+
+    name     String   
+    location String
+    desc     String
+
+    img      String 
+    url      String  
+
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

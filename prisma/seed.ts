@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+import bcrypt from "bcrypt";
 
 // Populat the database
 const dutyrates = [
@@ -16,10 +17,37 @@ const dutyrates = [
   },
 ];
 
+const users = [
+  {
+    name: "Hanif",
+    email: "hanif@test.com",
+    password: "admin1001",
+    emailVerified: null,
+    image: "",
+    role: 1,
+  },
+  {
+    name: "Rafiu",
+    email: "rafiu@test.com",
+    password: "admin1001",
+    emailVerified: null,
+    image: "",
+    role: 1,
+  },
+];
+
+
 async function main() {
   for (let rate of dutyrates) {
-    prisma.rateTable.create({
+    await prisma.rateTable.create({
       data: rate,
+    });
+  }
+
+  for (let user of users) {
+    user.password = await bcrypt.hash(user.password, 10);
+    await prisma.user.create({
+      data: user,
     });
   }
 }
@@ -32,3 +60,8 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
+
+  //   "prisma": {
+  //   "seed": "node --no-warnings=ExperimentalWarning --loader ts-node/esm prisma/seed.ts"
+  // },

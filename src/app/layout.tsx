@@ -7,7 +7,6 @@ import { TRPCReactProvider } from "~/trpc/react";
 import Nav from "./_components/nav";
 import { Toaster } from "~/components/ui/sonner";
 
-import { getServerAuthSession } from "~/server/auth";
 
 export const metadata: Metadata = {
   title: "Duty rate",
@@ -18,12 +17,11 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const session = await getServerAuthSession();
+  
   return (
     <html lang="en" className={`${GeistSans.variable} bg-[#F3EAE5]`}>
       <body>
         <TRPCReactProvider>
-          <Nav session={session}/>
           <Toaster richColors />
             {children}
         </TRPCReactProvider>

@@ -25,8 +25,6 @@ import { CircleUserIcon } from "lucide-react";
 
 export default function Nav({session}:{session:Session | null}) {
   const pathname = usePathname();
-    
-  const router = useRouter();
   return (
     <>
       <NavigationMenu className="fixed inset-x-0 top-0 z-50 w-screen bg-transparent">

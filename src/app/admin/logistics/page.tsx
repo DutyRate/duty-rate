@@ -19,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
+import { CreateForm } from "./_components/createForm";
 
 export default function Dashboard() {
   return (
@@ -27,14 +28,8 @@ export default function Dashboard() {
         <h1 className="text-lg font-semibold md:text-2xl">Logistics</h1>
       </div>
       <div className="flex flex-1 flex-col items-center justify-start rounded-lg border border-dashed shadow-sm">
-        <div className="flex flex-col items-center gap-1 text-center my-8">
-          <h3 className="text-2xl font-bold tracking-tight">
-            You have no products
-          </h3>
-          <p className="text-sm text-muted-foreground">
-            You can start selling as soon as you add a product.
-          </p>
-          <Button className="mt-4">Add Product</Button>
+        <div className="flex items-center justify-center gap-4 text-center my-8">
+          <CreateForm/>
         </div>
 
         <Table className="w-full border border-2">

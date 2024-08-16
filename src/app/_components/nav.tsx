@@ -40,10 +40,10 @@ export default function Nav({session}:{session:Session | null}) {
           <div className="hidden gap-4 md:flex">
             <NavigationMenuItem>
               {session ? (
-                <Link href="/admin" legacyBehavior passHref>
+                <Link href="/admin/dashboard" legacyBehavior passHref>
                   <NavigationMenuLink
                     className={`${navigationMenuTriggerStyle()} ${
-                      pathname == "/admin" && "text-semraGreen"
+                      pathname == "/admin/dashboard" && "text-semraGreen"
                     }`}
                   >
                     <CircleUserIcon size={20} className="mr-2" />

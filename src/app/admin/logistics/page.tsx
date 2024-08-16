@@ -18,79 +18,111 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { CreateForm } from "./_components/createForm";
+import { api } from "~/trpc/server";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const logistics = await api.logistics.getLatest();
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
       <div className="flex items-center">
         <h1 className="text-lg font-semibold md:text-2xl">Logistics</h1>
       </div>
       <div className="flex flex-1 flex-col items-center justify-start rounded-lg border border-dashed shadow-sm">
-        <div className="flex items-center justify-center gap-4 text-center my-8">
-          <CreateForm/>
+        <div className="my-8 flex items-center justify-center gap-4 text-center">
+          <CreateForm />
         </div>
 
-        <Table className="w-full border border-2">
+        <Table className="w-full">
           <TableHeader>
             <TableRow>
+              <TableHead className="hidden md:table-cell">Id</TableHead>
               <TableHead className="hidden w-[100px] sm:table-cell">
-                <span className="sr-only">Image</span>
+                Image
               </TableHead>
               <TableHead>Name</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="hidden md:table-cell">Price</TableHead>
-              <TableHead className="hidden md:table-cell">
-                Total Sales
-              </TableHead>
+              <TableHead>Location</TableHead>
+              <TableHead className="hidden md:table-cell">Desciption</TableHead>
+              <TableHead className="hidden md:table-cell">Website</TableHead>
               <TableHead className="hidden md:table-cell">Created at</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
             </TableRow>
           </TableHeader>
+
           <TableBody>
-            <TableRow>
-              <TableCell className="hidden sm:table-cell">
-                <Image
-                  alt="Product image"
-                  className="aspect-square rounded-md object-cover"
-                  height="64"
-                  src="/glovo.jpg"
-                  width="64"
-                />
-              </TableCell>
-              <TableCell className="font-medium">
-                Laser Lemonade Machine
-              </TableCell>
-              <TableCell>
-                <Badge variant="outline">Draft</Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">$499.99</TableCell>
-              <TableCell className="hidden md:table-cell">25</TableCell>
-              <TableCell className="hidden md:table-cell">
-                2023-07-12 10:42 AM
-              </TableCell>
-              <TableCell>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button aria-haspopup="true" size="icon" variant="ghost">
-                      <MoreHorizontal className="h-4 w-4" />
-                      <span className="sr-only">Toggle menu</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableCell>
-            </TableRow>
+            {logistics &&
+              logistics.map((logistic, i) => (
+                <TableRow key={logistic.id}>
+                  <TableCell className="hidden md:table-cell">
+                    {logistic.id}
+                  </TableCell>
+                  <TableCell className="hidden sm:table-cell">
+                    <Image
+                      alt="Product image"
+                      className="aspect-square rounded-md object-cover"
+                      height="64"
+                      src={logistic.img}
+                      width="64"
+                    />
+                  </TableCell>
+
+                  <TableCell className="font-medium">{logistic.name}</TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {logistic.location}
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {logistic.desc}
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {logistic.url}
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {formatDate(logistic.createdAt)}
+                  </TableCell>
+                  <TableCell>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          aria-haspopup="true"
+                          size="icon"
+                          variant="ghost"
+                        >
+                          <MoreHorizontal className="h-6 w-6" />
+                          <span className="sr-only">Toggle menu</span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem>
+                          <Pencil className="text-red mr-2" size={15} />
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="text-red-600">
+                          <Trash2 className="mr-2" size={15} />{" "}
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </div>
     </main>
   );
 }
+
+const formatDate = (date: Date) => {
+  new Date(date);
+  const month = date.getMonth();
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  return `${hours}:${minutes} on ${day}-${month}-${year}`;
+};

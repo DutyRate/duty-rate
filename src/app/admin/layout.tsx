@@ -97,9 +97,11 @@ export default async function DashboardLayout({
                 </nav>
               </div>
               <div className="mt-auto p-8">
-                <Button size="sm" className="w-full">
-                  <Home className="mr-4 h-4 w-4" />
-                  Go to home
+                <Button size="sm" asChild className="w-full">
+                  <Link href="/">
+                    <Home className="mr-4 h-4 w-4" />
+                    Go home
+                  </Link>
                 </Button>
               </div>
             </div>

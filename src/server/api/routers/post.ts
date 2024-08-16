@@ -30,7 +30,7 @@ export const logisticsRouter = createTRPCRouter({
 
   getLatest: protectedProcedure.query(async ({ ctx }) => {
     const post = await ctx.db.logisticsTable.findMany({
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: "asc" },
     });
 
     return post ?? null;

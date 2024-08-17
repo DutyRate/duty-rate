@@ -24,6 +24,7 @@ import { api } from "~/trpc/server";
 
 export default async function Dashboard() {
   const logistics = await api.logistics.getLatest();
+
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
       <div className="flex items-center">
@@ -101,8 +102,7 @@ export default async function Dashboard() {
                           Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem className="text-red-600">
-                          <Trash2 className="mr-2" size={15} />{" "}
-                          Delete
+                          <Trash2 className="mr-2" size={15} /> Delete
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -111,6 +111,9 @@ export default async function Dashboard() {
               ))}
           </TableBody>
         </Table>
+        <div className="text-xs text-muted-foreground">
+          Showing <strong>1-2</strong> of <strong>{logistics.length}</strong> companies
+        </div>
       </div>
     </main>
   );

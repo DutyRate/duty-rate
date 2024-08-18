@@ -36,9 +36,13 @@ export const ratesRouter = createTRPCRouter({
     })
   ).query(async ({ ctx, input }) => {
     const rates = await ctx.db.rateTable.findMany({
+      // cacheStrategy: {
+      //   ttl: 200,
+      // },
+      //TODO use Prisma accelerate to activate caching https://www.prisma.io/docs/accelerate/getting-started
       take: input.limit,
       // skip: (input.limit * input.page) - input.limit,
-      where:{
+      where: {
         OR: [
           // { cet: {in: input.query} }, TODO: convert cet field to string
           { desc: { contains: input.query } },

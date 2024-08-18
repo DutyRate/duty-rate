@@ -4,12 +4,13 @@ import {useState} from "react";
 
 interface ICommandProps {
   commands: { value: string; label: string }[];
-  className: string
+  className: string;
+  inputValue: string;
+  setInputValue: (value: string) => void;
 }
 
-export default function CommandSearch({ commands, className }: ICommandProps) {
+export default function CommandSearch({ commands, className, inputValue, setInputValue }: ICommandProps) {
   const [open, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("");
 
   const handleValueChange = (value: string) => {
     setInputValue(value);

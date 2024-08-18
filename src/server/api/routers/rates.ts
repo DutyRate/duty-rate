@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import { z } from "zod";
 import {
   createTRPCRouter,
@@ -28,12 +29,25 @@ export const ratesRouter = createTRPCRouter({
       });
     }),
 
-  getLatest: protectedProcedure.query(async ({ ctx }) => {
-    const post = await ctx.db.logisticsTable.findMany({
-      orderBy: { createdAt: "asc" },
+  searchRate: publicProcedure.input(
+    z.object({
+      query: z.string(),
+      limit: z.number().int().default(10).optional(),
+    })
+  ).query(async ({ ctx, input }) => {
+    const rates = await ctx.db.rateTable.findMany({
+      take: input.limit,
+      // skip: (input.limit * input.page) - input.limit,
+      where:{
+        OR: [
+          // { cet: {in: input.query} }, TODO: convert cet field to string
+          { desc: { contains: input.query } },
+        ],
+      },
+      // orderBy: { createdAt: "asc" },
     });
 
-    return post ?? null;
+    return rates ?? [];
   }),
 
   getSecretMessage: protectedProcedure.query(() => {

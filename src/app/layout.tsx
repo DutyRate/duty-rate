@@ -4,7 +4,6 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import Nav from "./_components/nav";
 import { Toaster } from "~/components/ui/sonner";
 
 
@@ -19,11 +18,12 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   
   return (
-    <html lang="en" className={`${GeistSans.variable} bg-[#F3EAE5]`}>
+    // bg-[#F3EAE5]
+    <html lang="en" className={`${GeistSans.variable} bg-white`}>
       <body>
         <TRPCReactProvider>
           <Toaster richColors />
-            {children}
+          {children}
         </TRPCReactProvider>
       </body>
     </html>

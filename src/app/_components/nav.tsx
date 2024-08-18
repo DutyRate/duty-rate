@@ -63,7 +63,7 @@ export default function Nav({session}:{session:Session | null}) {
               )}
             </NavigationMenuItem>
 
-            <NavigationMenuItem>
+            <NavigationMenuItem >
               <Link href="/events" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} ${

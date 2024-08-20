@@ -1,13 +1,13 @@
 
-import { Nunito } from "next/font/google";
+import { Baumans } from "next/font/google";
 import { api, HydrateClient } from "~/trpc/server";
 import NewsBadge from "../_components/news";
 import { TextEffect } from "../_motionComponents/text-effect";
 import React from "react";
 import InputForm from "./_components/inputForm";
 
-const nunito = Nunito({
-  weight: "variable",
+const nunito = Baumans({
+  weight: "400",
   subsets: ["latin"],
 });
 export default async function Home() {

@@ -1,15 +1,25 @@
 
-import { Baumans } from "next/font/google";
+// import { Baumans } from "next/font/local";
+import localFont from "next/font/local";
 import { api, HydrateClient } from "~/trpc/server";
 import NewsBadge from "../_components/news";
 import { TextEffect } from "../_motionComponents/text-effect";
 import React from "react";
 import InputForm from "./_components/inputForm";
 
-const nunito = Baumans({
-  weight: "400",
-  subsets: ["latin"],
+
+// const nunito = Nunito({
+//   weight: "variable",
+const bauhmaus = localFont({
+  src: "./BAUHS93.woff",
+  style: "normal",
+  weight: "800",
+  display: "swap",
 });
+// const nunito = Baumans({
+//   weight: "400",
+//   subsets: ["latin"],
+// });
 export default async function Home() {
   // const hello = await api.post.hello({ text: "from tRPC" });
   const commands = [
@@ -26,12 +36,12 @@ export default async function Home() {
     <HydrateClient>
       <main className="flex min-h-screen w-screen flex-col items-center justify-center gap-10 bg-[#F3EAE5]/50">
         <NewsBadge />
-        <div className={`text-[100px] font-bold ${nunito.className}`}>
+        <div className={`text-[120px] font-bold ${bauhmaus.className}`}>
           <TextEffect per="word" as="h3" preset="slide">
-            Duty Rate
+            duty rate
           </TextEffect>
         </div>
-        <InputForm/>
+        <InputForm />
       </main>
     </HydrateClient>
   );

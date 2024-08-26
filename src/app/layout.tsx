@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
+import {Lexend_Deca} from "next/font/google";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
@@ -13,7 +14,12 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-
+const lexend_Deca = Lexend_Deca({
+  style: "normal",
+  weight: "300",
+  display: "swap",
+  subsets: ["latin"],
+});
 
 export default async function RootLayout({
   children,
@@ -21,7 +27,7 @@ export default async function RootLayout({
   
   return (
     // bg-[#F3EAE5]
-    <html lang="en" className={`${GeistSans.variable} bg-white`}>
+    <html lang="en" className={`${lexend_Deca.className} bg-white`}>
       <body>
         <TRPCReactProvider>
           <Toaster richColors />

@@ -44,7 +44,7 @@ export const ratesRouter = createTRPCRouter({
       // skip: (input.limit * input.page) - input.limit,
       where: {
         OR: [
-          // { cet: {in: input.query} }, TODO: convert cet field to string
+          { cet: { contains: input.query} }, 
           { desc: { contains: input.query } },
         ],
       },

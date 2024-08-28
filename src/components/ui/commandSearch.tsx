@@ -28,6 +28,7 @@ export default function CommandSearch({ commands, className, inputValue, setInpu
       <CommandInput
         placeholder="Type a command or search..."
         onValueChange={handleValueChange}
+        value={inputValue}
         className="w-full"
       />
       {

@@ -5,21 +5,15 @@ import { api, HydrateClient } from "~/trpc/server";
 import NewsBadge from "../_components/news";
 import { TextEffect } from "../_motionComponents/text-effect";
 import React from "react";
-import InputForm from "./_components/inputForm";
+import SearchInput from "./_components/searchInput";
 
 
-// const nunito = Nunito({
-//   weight: "variable",
 const bauhmaus = localFont({
   src: "./BAUHS93.woff",
   style: "normal",
   weight: "800",
   display: "swap",
 });
-// const nunito = Baumans({
-//   weight: "400",
-//   subsets: ["latin"],
-// });
 export default async function Home() {
   // const hello = await api.post.hello({ text: "from tRPC" });
   const commands = [
@@ -31,7 +25,6 @@ export default async function Home() {
   // void api.post.getLatest.prefetch();
   // You can prefetch any important details for the homepage
 
-
   return (
     <HydrateClient>
       <main className="flex min-h-screen w-screen flex-col items-center justify-center gap-10 bg-[#F3EAE5]/50">
@@ -41,7 +34,7 @@ export default async function Home() {
             duty rate
           </TextEffect>
         </div>
-        <InputForm />
+        <SearchInput />
       </main>
     </HydrateClient>
   );

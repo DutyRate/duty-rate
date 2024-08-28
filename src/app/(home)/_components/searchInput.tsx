@@ -3,10 +3,15 @@
 import { useState } from "react";
 import CommandSearch from "~/components/ui/commandSearch";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
-export default function InputForm() {
-  const [inputValue, setInputValue] = useState("");
+
+interface SearchInputProps {
+  className?: string;
+  intialText?: string;
+}
+
+export default function SearchInput(props: SearchInputProps) {
+  const [inputValue, setInputValue] = useState(props.intialText ?? "");
   const searchParams = useSearchParams();
-  const pathname = usePathname();
   const { replace } = useRouter();
 
   const onSearch = (event: React.FormEvent) => {
@@ -19,14 +24,14 @@ export default function InputForm() {
   return (
     <form
       onSubmit={onSearch}
-      className="w-2/5"
+      className={`${props.className ?? ""} w-2/5`}
       onKeyDown={(e) => {
         if (e.key === "Enter") onSearch(e);
       }}
     >
       <CommandSearch
         commands={[]}
-        className=""
+        className={""}
         inputValue={inputValue}
         setInputValue={setInputValue}
       />

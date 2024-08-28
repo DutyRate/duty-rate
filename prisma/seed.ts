@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 // Populat the database
 const dutyrates = [
   {
-    cet: 1701911000,
+    cet: "1701911000",
     desc: "Other, Cane or beet sugar ..,with favour/colour in powder, crystal or granule form",
     su: "KG",
     duty: 20,
@@ -36,6 +36,23 @@ const users = [
   },
 ];
 
+const logistics = [
+  {
+    name: "Glovo",
+    location: "Abuja, Nigeria",
+    img: "/glovo.jpg",
+    desc: "A german logistics company",
+    url: "https://glovo.com",
+  },
+  {
+    name: "Chowdeck",
+    location: "Abuja, Nigeria",
+    desc: "A YC Backed company",
+    img: "/glovo.jpg",
+    url: "https://glovo.com",
+  },
+];
+
 
 async function main() {
   for (let rate of dutyrates) {
@@ -48,6 +65,12 @@ async function main() {
     user.password = await bcrypt.hash(user.password, 10);
     await prisma.user.create({
       data: user,
+    });
+  }
+
+  for (let logistic of logistics) {
+    await prisma.logisticsTable.create({
+      data: logistic,
     });
   }
 }

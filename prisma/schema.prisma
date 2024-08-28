@@ -92,7 +92,7 @@ model VerificationToken {
 model RateTable {
     id     Int    @id @default(autoincrement())
 
-    cet    Int    @unique //TODO: convert cet field to string
+    cet    String    @unique
     desc  String
     // su  SUtype  @default(U) for migration to postgres
     su     String @default("U")

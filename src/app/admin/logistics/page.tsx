@@ -23,7 +23,7 @@ import { CreateForm } from "./_components/createForm";
 import { api } from "~/trpc/server";
 
 export default async function Dashboard() {
-  const logistics = await api.logistics.getLatest();
+  const logistics = await api.logistics.getLatest({});
 
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">

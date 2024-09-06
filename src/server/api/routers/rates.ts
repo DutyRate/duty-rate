@@ -1,4 +1,3 @@
-import { Search } from "lucide-react";
 import { z } from "zod";
 import {
   createTRPCRouter,

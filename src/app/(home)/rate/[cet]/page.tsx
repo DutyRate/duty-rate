@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { Button } from "~/components/ui/button";
+import Image from "next/image";
 
 
 export default function DetailRatePage({
@@ -22,9 +23,19 @@ export default function DetailRatePage({
 }: {
   params: { cet: string };
 }) {
-  const { data: rate, isLoading } = api.rates.getRate.useQuery({
+  const { data: rate, isLoading, isFetched } = api.rates.getRate.useQuery({
     query: params.cet,
   });
+
+  const { data: images } = api.unsplash.getImage.useQuery(
+    {
+      query: "sugar powder", //TODO: Change this to the content of description, extract main item
+    },
+    {
+      enabled: !!rate, // This ensures the query only runs when rate is available
+    }
+  );
+
   const router = useRouter()
   const goBack = () =>{
      router.back();
@@ -55,38 +66,52 @@ export default function DetailRatePage({
                   size="icon"
                   className="rounded-full outline-none"
                 >
-                  <Share2
-                    className="cursor-pointer h-5 w-5"
-                  />
+                  <Share2 className="h-5 w-5 cursor-pointer" />
                   <span className="sr-only">Toggle user menu</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>Copy Link <Copy className="ml-2 h-5 w-5"/></DropdownMenuItem>
+                <DropdownMenuItem>
+                  Copy Link <Copy className="ml-2 h-5 w-5" />
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </section>
-          <div className="relative">
-            <div className="flex gap-4">
-              <h2>HSCode {rate.cet}</h2>
-              <Badge>{rate.su}</Badge>
-            </div>
 
-            <h2 className="mt-6 text-[24px]">{rate.desc}</h2>
-            {rate.duty && (
-              <h2 className="text-[22px]">Duty rate: {rate.duty}%</h2>
-            )}
+          <div className="flex gap-4 justify-between items-center ">
+            <section className="relative">
+              <div className="flex gap-4">
+                <h2>HSCode {rate.cet}</h2>
+                <Badge>{rate.su}</Badge>
+              </div>
 
-            <h3 className="mt-12 text-[20px]">
-              The additional cost added on this item is listed below:
-            </h3>
+              <h2 className="mt-6 text-[24px]">{rate.desc}</h2>
+              {rate.duty && (
+                <h2 className="text-[22px]">Duty rate: {rate.duty}%</h2>
+              )}
 
-            <ul className="text-[18px]">
-              {rate.vat && <li>Value Added Tax: {rate.vat}%</li>}
-              {rate.lvy && <li>Levy: {rate.lvy}%</li>}
-              {rate.exc && <li>EXC: {rate.exc}</li>}
-            </ul>
-            <PDFViewer />
+              <h3 className="mt-12 text-[20px]">
+                The additional cost added on this item is listed below:
+              </h3>
+
+              <ul className="text-[18px]">
+                {rate.vat && <li>Value Added Tax: {rate.vat}%</li>}
+                {rate.lvy && <li>Levy: {rate.lvy}%</li>}
+                {rate.exc && <li>EXC: {rate.exc}</li>}
+              </ul>
+              <PDFViewer />
+            </section>
+
+            <section className="relative h-48 w-2/5  rounded-lg flex flex-row">
+              {images && (
+                <Image
+                  src={images[0]?.url ?? ""}
+                  fill
+                  alt={images[0]?.desc ?? ""}
+                  className="object-cover rounded-lg"
+                />
+              )}
+            </section>
           </div>
         </Card>
       )}

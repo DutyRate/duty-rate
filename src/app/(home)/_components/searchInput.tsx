@@ -7,6 +7,7 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 interface SearchInputProps {
   className?: string;
   intialText?: string;
+  placeholder?: string;
 }
 
 export default function SearchInput(props: SearchInputProps) {
@@ -30,6 +31,7 @@ export default function SearchInput(props: SearchInputProps) {
       }}
     >
       <CommandSearch
+        placeholder={props.placeholder}
         commands={[]}
         className={""}
         inputValue={inputValue}

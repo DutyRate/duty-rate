@@ -7,9 +7,10 @@ interface ICommandProps {
   className: string;
   inputValue: string;
   setInputValue: (value: string) => void;
+  placeholder?: string;
 }
 
-export default function CommandSearch({ commands, className, inputValue, setInputValue }: ICommandProps) {
+export default function CommandSearch({ commands, className, inputValue, setInputValue , placeholder}: ICommandProps) {
   const [open, setOpen] = useState(false);
 
   const handleValueChange = (value: string) => {
@@ -26,7 +27,7 @@ export default function CommandSearch({ commands, className, inputValue, setInpu
   return (
     <Command className={`rounded-[20px] shadow-sm ${className}}`}>
       <CommandInput
-        placeholder="Type a command or search..."
+        placeholder={placeholder || "Type a command or search..."}
         onValueChange={handleValueChange}
         value={inputValue}
         className="w-full"

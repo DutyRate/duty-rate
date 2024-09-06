@@ -21,7 +21,7 @@ import { siFacebook } from "simple-icons";
 import { MobileNav } from "./mobileNav";
 
 import { Session } from "next-auth";
-import { CircleUserIcon } from "lucide-react";
+import { CircleUserIcon, Container, ForkliftIcon, Ship, SquareUserRound, Warehouse } from "lucide-react";
 
 export default function Nav({session}:{session:Session | null}) {
   const pathname = usePathname();
@@ -42,7 +42,7 @@ export default function Nav({session}:{session:Session | null}) {
               {session ? (
                 <Link href="/admin/dashboard" legacyBehavior passHref>
                   <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} ${
+                    className={`${navigationMenuTriggerStyle()} border border-2 border-black/10 bg-transparent ${
                       pathname == "/admin/dashboard" && "text-semraGreen"
                     }`}
                   >
@@ -63,50 +63,53 @@ export default function Nav({session}:{session:Session | null}) {
               )}
             </NavigationMenuItem>
 
-            <NavigationMenuItem >
-              <Link href="/events" legacyBehavior passHref>
+            <NavigationMenuItem>
+              <Link href="/logistics" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} ${
-                    pathname == "/events" && "text-semraGreen"
+                    pathname == "/logistics" && "text-semraGreen"
                   }`}
                 >
-                  Logistics
+                  <ForkliftIcon className="mr-2 h-5 w-5" /> Logistics
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
+              <Link href="/agents" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} ${
-                    pathname == "/contact" && "text-semraGreen"
+                    pathname == "/agents" && "text-semraGreen"
                   } text-base`} //bg-[#F5F5F5]
                 >
+                  <SquareUserRound className="mr-2 h-5 w-5" />
                   Clearing and forwarding agents
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
+              <Link href="/warehouses" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} ${
-                    pathname == "/contact" && "text-semraGreen"
+                    pathname == "/warehouses" && "text-semraGreen"
                   } text-base`} //bg-[#F5F5F5]
                 >
+                  <Warehouse className="mr-2 h-5 w-5" />
                   Bonded warehouses
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
+              <Link href="/port-facilities" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} ${
-                    pathname == "/contact" && "text-semraGreen"
+                    pathname == "/port-facilities" && "text-semraGreen"
                   } text-base`} //bg-[#F5F5F5]
                 >
-                 Port facilities
+                  <Container className="mr-2 h-5 w-5" />
+                   Port facilities
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

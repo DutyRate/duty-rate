@@ -28,13 +28,15 @@ export const logisticsRouter = createTRPCRouter({
       });
     }),
 
-  getLatest: protectedProcedure.query(async ({ ctx }) => {
-    const post = await ctx.db.logisticsTable.findMany({
-      orderBy: { createdAt: "asc" },
-    });
+  getLatest: protectedProcedure
+    .input(z.object({ limit: z.number().int().default(20).optional() }))
+    .query(async ({ ctx }) => {
+      const post = await ctx.db.logisticsTable.findMany({
+        orderBy: { createdAt: "asc" },
+      });
 
-    return post ?? null;
-  }),
+      return post ?? null;
+    }),
 
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";

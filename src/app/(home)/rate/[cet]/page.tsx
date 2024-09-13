@@ -52,7 +52,7 @@ export default function DetailRatePage({
         </Card>
       )}
       {rate && (
-        <Card className="relative flex h-max min-h-96 w-2/3 flex-col items-center justify-center rounded-lg border border-2 bg-transparent">
+        <Card className="relative flex h-max min-h-96 w-2/3 flex-col items-center justify-center rounded-lg border border-2 bg-transparent pt-12">
           <section className="absolute top-4 flex w-full items-center justify-between px-4">
             <ChevronLeft
               size={30}
@@ -78,7 +78,7 @@ export default function DetailRatePage({
             </DropdownMenu>
           </section>
 
-          <div className="flex gap-4 justify-between items-center ">
+          <div className="flex items-center justify-between gap-4">
             <section className="relative">
               <div className="flex gap-4">
                 <h2>HSCode {rate.cet}</h2>
@@ -99,19 +99,23 @@ export default function DetailRatePage({
                 {rate.lvy && <li>Levy: {rate.lvy}%</li>}
                 {rate.exc && <li>EXC: {rate.exc}</li>}
               </ul>
-              <PDFViewer />
+              {/* Show PDF of page */}
             </section>
 
-            <section className="relative h-48 w-2/5  rounded-lg flex flex-row">
+            <section className="relative flex h-64 w-2/5 flex-row rounded-lg">
               {images && (
                 <Image
                   src={images[0]?.url ?? ""}
                   fill
                   alt={images[0]?.desc ?? ""}
-                  className="object-cover rounded-lg"
+                  className="rounded-lg object-cover"
                 />
               )}
             </section>
+          </div>
+
+          <div className="relative w-max min-h-96 overflow-scroll border border-4">
+            <PDFViewer initialPage={rate.pdf}/>
           </div>
         </Card>
       )}

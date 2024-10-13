@@ -122,8 +122,8 @@ export function TextEffect({
   const selectedVariants = preset
     ? presetVariants[preset]
     : { container: defaultContainerVariants, item: defaultItemVariants };
-  const containerVariants = variants?.container || selectedVariants.container;
-  const itemVariants = variants?.item || selectedVariants.item;
+  const containerVariants = variants?.container ?? selectedVariants.container;
+  const itemVariants = variants?.item ?? selectedVariants.item;
 
   return (
     <MotionTag

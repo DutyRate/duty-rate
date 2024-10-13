@@ -3,7 +3,7 @@
 import { Card } from "~/components/ui/card";
 import { api } from "~/trpc/react";
 import { ChevronLeft, ChevronRightCircle, Copy, Share2 } from "lucide-react";
-import PDFViewer from "./_components/pdfViewer";
+// import PDFViewer from "./_components/pdfViewer";
 import { Badge } from "~/components/ui/badge";
 import { useRouter } from "next/navigation";
 import {
@@ -115,7 +115,7 @@ export default function DetailRatePage({
           </div>
 
           <div className="relative w-max min-h-96 overflow-scroll border border-4">
-            <PDFViewer initialPage={rate.pdf}/>
+            {/* <PDFViewer initialPage={rate.pdf}/> */}
           </div>
         </Card>
       )}

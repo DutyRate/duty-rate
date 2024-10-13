@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import CommandSearch from "~/components/ui/commandSearch";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 interface SearchInputProps {
   className?: string;

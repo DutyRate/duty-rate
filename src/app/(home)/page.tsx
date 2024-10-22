@@ -1,7 +1,7 @@
 
 // import { Baumans } from "next/font/local";
 import localFont from "next/font/local";
-import { api, HydrateClient } from "~/trpc/server";
+import { HydrateClient } from "~/trpc/server";
 import NewsBadge from "../_components/news";
 import { TextEffect } from "../_motionComponents/text-effect";
 import React from "react";
@@ -16,11 +16,11 @@ const bauhmaus = localFont({
 });
 export default async function Home() {
   // const hello = await api.post.hello({ text: "from tRPC" });
-  const commands = [
+  // const commands = [
     // { value: "calendar", label: "Calendar" },
     // { value: "search-emoji", label: "Search Emoji" },
     // { value: "calculator", label: "Calculator" },
-  ];
+  // ];
 
   // void api.post.getLatest.prefetch();
   // You can prefetch any important details for the homepage

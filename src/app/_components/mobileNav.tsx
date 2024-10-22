@@ -1,13 +1,9 @@
 "use client";
 import {
-  NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "~/components/ui/navigation-menu";
 import React from "react";
 import { cn } from "~/lib/utils";

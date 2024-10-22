@@ -1,5 +1,5 @@
 "use client";
-import { motion, Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import React from "react";
 
 type PresetType = "blur" | "shake" | "scale" | "fade" | "slide";

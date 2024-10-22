@@ -27,7 +27,7 @@ export default function CommandSearch({ commands, className, inputValue, setInpu
   return (
     <Command className={`rounded-[20px] shadow-sm ${className}}`}>
       <CommandInput
-        placeholder={placeholder || "Type a command or search..."}
+        placeholder={placeholder ?? "Type a command or search..."}
         onValueChange={handleValueChange}
         value={inputValue}
         className="w-full"

@@ -8,14 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import { Badge } from "~/components/ui/badge";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
@@ -54,8 +51,7 @@ export default async function Dashboard() {
           </TableHeader>
 
           <TableBody>
-            {logistics &&
-              logistics.map((logistic, i) => (
+            {logistics?.map((logistic) => (
                 <TableRow key={logistic.id}>
                   <TableCell className="hidden md:table-cell">
                     {logistic.id}

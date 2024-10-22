@@ -1,5 +1,4 @@
-import { LogisticsTable } from "@prisma/client";
-import { ChevronRightCircle } from "lucide-react";
+import { type LogisticsTable } from "@prisma/client";
 import { motion } from "framer-motion";
 
 import Image from "next/image";

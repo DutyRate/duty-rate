@@ -1,17 +1,12 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import {
-  Session,
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
-import DiscordProvider from "next-auth/providers/discord";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { env } from "~/env";
 import { db } from "~/server/db";
-import { JWT } from "next-auth/jwt";
-import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -77,7 +72,7 @@ export const authOptions: NextAuthOptions = {
 
         const passwordMatch = await bcrypt.compare(
           credentials.password,
-          user?.password as string,
+          user!.password ,
         );
 
         if (!passwordMatch) throw new Error("Invalid password");
@@ -116,7 +111,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (token && session.user) {
         session.user.id = token._id as string;
-        session.user.email = token.email as string;
+        session.user.email = token.email;
         session.user.role = token.role as number;
       }
       return session;

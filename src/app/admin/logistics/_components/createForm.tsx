@@ -22,7 +22,6 @@ import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -46,7 +45,7 @@ const FormSchema = z.object({
 
 export function CreateForm() {
   const createLogistics = api.logistics.create.useMutation({
-    onSuccess: async (data) => {
+    onSuccess: async () => {
       console.log("Created Successfully");
       // Use a toast alert here
       toast({

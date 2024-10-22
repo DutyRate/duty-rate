@@ -1,7 +1,5 @@
 import { redirect } from "next/navigation";
 import { getServerAuthSession } from "~/server/auth";
-
-import { headers } from "next/headers";
 import AdminNavBar from "./_components/navbar";
 
 export default async function DashboardLayout({
@@ -10,8 +8,8 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerAuthSession();
-  const headerList = headers();
-  const pathname = headerList.get("x-current-path");
+  // const headerList = headers();
+  // const pathname = headerList.get("x-current-path");
   const isAdmin = session?.user.role == 1;
   if (!session || !isAdmin) redirect('/');
   

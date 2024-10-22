@@ -13,14 +13,14 @@ interface SearchInputProps {
 export default function SearchInput(props: SearchInputProps) {
   const [inputValue, setInputValue] = useState(props.intialText ?? "");
   const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const router = useRouter();
 
   const onSearch = (event: React.FormEvent) => {
     event.preventDefault();
     console.log("searchTerm", inputValue);
     const params = new URLSearchParams(searchParams);
     if (inputValue) params.set("q", inputValue);
-    replace(`/rate?${params.toString()}`);
+    router.replace(`/rate?${params.toString()}`);
   };
   return (
     <form

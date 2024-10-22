@@ -2,7 +2,7 @@
 
 import { Card } from "~/components/ui/card";
 import { api } from "~/trpc/react";
-import { ChevronLeft, ChevronRightCircle, Copy, Share2 } from "lucide-react";
+import { ChevronLeft, Copy, Share2 } from "lucide-react";
 // import PDFViewer from "./_components/pdfViewer";
 import { Badge } from "~/components/ui/badge";
 import { useRouter } from "next/navigation";
@@ -10,8 +10,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { Button } from "~/components/ui/button";
@@ -22,7 +20,7 @@ export default function DetailRatePage({
 }: {
   params: { cet: string };
 }) {
-  const { data: rate, isLoading, isFetched } = api.rates.getRate.useQuery({
+  const { data: rate, isLoading } = api.rates.getRate.useQuery({
     query: params.cet,
   });
 

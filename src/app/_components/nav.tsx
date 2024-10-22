@@ -1,27 +1,21 @@
 "use client";
 
-import { Button } from "~/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "~/components/ui/navigation-menu";
 import { navigationMenuTriggerStyle } from "~/components/ui/navigation-menu";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 // Icons
-import { siFacebook } from "simple-icons";
 import { MobileNav } from "./mobileNav";
 
-import { Session } from "next-auth";
-import { CircleUserIcon, Container, ForkliftIcon, Ship, SquareUserRound, Warehouse } from "lucide-react";
+import { type Session } from "next-auth";
+import { CircleUserIcon, Container, ForkliftIcon, SquareUserRound, Warehouse } from "lucide-react";
 
 export default function Nav({session}:{session:Session | null}) {
   const pathname = usePathname();

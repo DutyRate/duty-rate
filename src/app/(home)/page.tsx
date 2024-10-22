@@ -34,7 +34,7 @@ export default async function Home() {
             duty rate
           </TextEffect>
         </div>
-        <SearchInput />
+        <SearchInput placeholder="Search for a CET Number or the name of item" />
       </main>
     </HydrateClient>
   );

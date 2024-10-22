@@ -57,7 +57,7 @@ export default function Nav({session}:{session:Session | null}) {
                       pathname == "/login" && "text-semraGreen"
                     }`}
                   >
-                    Login
+                    Admin Login
                   </NavigationMenuLink>
                 </Link>
               )}

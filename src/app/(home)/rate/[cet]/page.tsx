@@ -17,7 +17,6 @@ import {
 import { Button } from "~/components/ui/button";
 import Image from "next/image";
 
-
 export default function DetailRatePage({
   params,
 }: {
@@ -41,7 +40,7 @@ export default function DetailRatePage({
      router.back();
   }
   return (
-    <main className="relative flex min-h-screen w-screen flex-col items-center justify-center gap-10 bg-[#F3EAE5]/50">
+    <main className="relative flex min-h-screen w-screen flex-col items-center justify-center gap-10">
       {!rate && !isLoading && (
         <Card className="flex h-max min-h-96 w-2/3 flex-col items-center justify-center rounded-lg border border-2 bg-transparent">
           {/* Display an error message, if rate cannot be found */}
@@ -114,9 +113,13 @@ export default function DetailRatePage({
             </section>
           </div>
 
-          <div className="relative w-max min-h-96 overflow-scroll border border-4">
-            {/* <PDFViewer initialPage={rate.pdf}/> */}
-          </div>
+          {/* <PDFViewer initialPage={rate.pdf}/> */}
+          <iframe
+            src={`/CET-rules.pdf#page=${rate.pdf}#toolbar=0zoom=120`}
+            width="100vw"
+            height="100%"
+            className="relative mt-10 h-[700px] w-full border border-4"
+          ></iframe>
         </Card>
       )}
     </main>

@@ -28,7 +28,7 @@ export const logisticsRouter = createTRPCRouter({
       });
     }),
 
-  getLatest: protectedProcedure
+  getLatest: publicProcedure
     .input(z.object({ limit: z.number().int().default(20).optional() }))
     .query(async ({ ctx }) => {
       const post = await ctx.db.logisticsTable.findMany({

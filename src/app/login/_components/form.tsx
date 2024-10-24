@@ -18,8 +18,10 @@ import { Button } from "~/components/ui/button";
 import { type User } from "@prisma/client";
 
 import { signIn } from "next-auth/react";
+import { useToast } from "~/components/ui/use-toast";
 
 export default function LoginForm() {
+  const { toast } = useToast();
   const {
     register,
     handleSubmit,
@@ -34,11 +36,15 @@ export default function LoginForm() {
       callbackUrl: "/",
       redirect: true,
     });
+    console.log(response);
 
-    if (!response) alert("Email or password is incorrect");
+    if (!response) toast({
+      variant: "destructive",
+      description: "Unable to sign you in",
+    });
   };
   return (
-    <form onSubmit={handleSubmit(submitData)}>
+    <form onSubmit={(e) => handleSubmit(submitData)}>
       <Card className="mx-auto max-w-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-center text-2xl font-bold">

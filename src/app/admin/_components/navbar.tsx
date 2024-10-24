@@ -21,14 +21,21 @@ import {
 
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
-
+import { getSession, signOut } from "next-auth/react";
 import { Input } from "~/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { getServerSession } from "next-auth";
+import { stringRole } from "~/lib/utils";
 
-export default function AdminNavBar({ children }: {children: React.ReactNode}) {
+export default async function AdminNavBar({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
+   const session = await getSession();
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -151,12 +158,22 @@ export default function AdminNavBar({ children }: {children: React.ReactNode}) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel className="flex gap-2">
+                <CircleUser className="h-5 w-5" />{session?.user.name}
+              </DropdownMenuLabel>
+              <DropdownMenuLabel>
+                {stringRole(Number(session?.user.role))}
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                Logout
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

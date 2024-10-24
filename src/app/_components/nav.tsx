@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
 } from "~/components/ui/navigation-menu";
 import { navigationMenuTriggerStyle } from "~/components/ui/navigation-menu";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -25,7 +25,7 @@ export default function Nav({session}:{session:Session | null}) {
         <NavigationMenuList className="flex h-14 w-screen items-center justify-between p-12">
           <Link href="/" className="flex items-center" prefetch={false}>
             <div className="flex items-center justify-start gap-4">
-              <Image src="/icon.png" width={30} height={30} alt="logo" />
+              {/* <Image src="/icon.png" width={30} height={30} alt="logo" /> */}
               <h1 className="text-xl font-medium text-black">Duty Rate</h1>
             </div>
             <span className="sr-only">Duty rate</span>

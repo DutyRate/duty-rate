@@ -26,7 +26,6 @@ import { Input } from "~/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { getServerSession } from "next-auth";
 import { stringRole } from "~/lib/utils";
 
 export default async function AdminNavBar({
@@ -168,8 +167,8 @@ export default async function AdminNavBar({
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onClick={() => {
-                  signOut();
+                onClick={async () => {
+                  await signOut().catch(() => console.log("Could not sign out"));
                 }}
               >
                 Logout

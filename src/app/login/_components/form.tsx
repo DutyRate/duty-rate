@@ -44,7 +44,7 @@ export default function LoginForm() {
     });
   };
   return (
-    <form onSubmit={(e) => handleSubmit(submitData)}>
+    <form onSubmit={() => handleSubmit(submitData)}>
       <Card className="mx-auto max-w-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-center text-2xl font-bold">

@@ -49,8 +49,8 @@ export default function DetailRatePage({
         </Card>
       )}
       {rate && (
-        <Card className="relative flex h-max min-h-96 w-2/3 flex-col items-center justify-center rounded-lg border border-2 bg-transparent pt-12">
-          <section className="absolute top-4 flex w-full items-center justify-between px-4">
+        <Card className="relative flex h-max min-h-96 w-2/3 flex-col items-center justify-center rounded-lg border border-2 bg-transparent pt-6 ">
+          <section className="top-4 flex w-full items-center justify-between px-4 mb-6">
             <ChevronLeft
               size={30}
               className="cursor-pointer"
@@ -92,9 +92,9 @@ export default function DetailRatePage({
               </h3>
 
               <ul className="text-[18px]">
-                {rate.vat && <li>Value Added Tax: {rate.vat}%</li>}
-                {rate.lvy && <li>Levy: {rate.lvy}%</li>}
-                {rate.exc && <li>EXC: {rate.exc}</li>}
+                {rate.vat > 0 && <li>Value Added Tax: {rate.vat}%</li>}
+                {rate.lvy > 0 && <li>Levy: {rate.lvy}%</li>}
+                {rate.exc > 0 && <li>EXC: {rate.exc}</li>}
               </ul>
               {/* Show PDF of page */}
             </section>
@@ -112,12 +112,17 @@ export default function DetailRatePage({
           </div>
 
           {/* <PDFViewer initialPage={rate.pdf}/> */}
-          <iframe
-            src={`/CET-rules.pdf#page=${rate.pdf}#toolbar=0zoom=120`}
-            width="100vw"
-            height="100%"
-            className="relative mt-10 h-[700px] w-full border border-4"
-          ></iframe>
+          <div className="mt-12 w-full">
+            <p className="text-[20px] text-lg px-4">
+              More details on the pdf document
+            </p>
+            <iframe
+              src={`/CET-rules.pdf#page=${rate.pdf}&toolbar=0&zoom=100`}
+              width="100vw"
+              height="100%"
+              className="relative mt-10 h-[700px] w-full"
+            ></iframe>
+          </div>
         </Card>
       )}
     </main>

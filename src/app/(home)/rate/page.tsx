@@ -17,10 +17,10 @@ export default function RatePage() {
     router.push(`/rate/${cet}`);
   };
   return (
-    <main className="relative flex min-h-screen w-screen flex-col items-center justify-start gap-10 ">
+    <main className="relative flex min-h-screen w-screen flex-col items-center justify-start gap-10">
       {/* Use Skeleton to simulate loading of data */}
       <SearchInput
-        className="absolute top-24"
+        className=""
         intialText={searchParams.get("q") ?? ""}
       />
       {/* Text to show, when no result is found */}

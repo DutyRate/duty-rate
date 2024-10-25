@@ -4,5 +4,5 @@ export default async function RateLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section className="bg-[#F3EAE5]/50 pt-24">{children}</section>;
+  return <section className="bg-[#F3EAE5]/50 pt-36">{children}</section>;
 }

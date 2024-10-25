@@ -17,7 +17,7 @@ export default function RatePage() {
     router.push(`/rate/${cet}`);
   };
   return (
-    <main className="relative flex min-h-screen w-screen flex-col items-center justify-start gap-10">
+    <main className="relative flex min-h-screen w-screen flex-col items-center justify-start gap-5 ">
       {/* Use Skeleton to simulate loading of data */}
       <SearchInput
         className=""
@@ -55,7 +55,7 @@ export default function RatePage() {
             {rate.cet} {rate.desc} {rate.duty}%
           </div>
           <div>
-            <ChevronRightCircle size="25" className="" />
+            <ChevronRightCircle size="25" className="opacity-50" />
           </div>
         </motion.div>
       ))}

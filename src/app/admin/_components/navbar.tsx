@@ -67,7 +67,7 @@ export default async function AdminNavBar({
                 }`}
               >
                 <Package className="h-4 w-4" />
-                Logitics companies{" "}
+                Logistics companies{" "}
                 <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                   1
                 </Badge>

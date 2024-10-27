@@ -5,6 +5,7 @@ import SearchInput from "../_components/searchInput";
 import { ChevronRightCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { Skeleton } from "~/components/ui/skeleton";
+import { Badge } from "~/components/ui/badge";
 
 export default function RatePage() {
   const router = useRouter();
@@ -17,12 +18,9 @@ export default function RatePage() {
     router.push(`/rate/${cet}`);
   };
   return (
-    <main className="relative flex min-h-screen w-screen flex-col items-center justify-start gap-5 ">
+    <main className="relative flex min-h-screen w-screen flex-col items-center justify-start gap-5">
       {/* Use Skeleton to simulate loading of data */}
-      <SearchInput
-        className=""
-        intialText={searchParams.get("q") ?? ""}
-      />
+      <SearchInput className="" intialText={searchParams.get("q") ?? ""} />
       {/* Text to show, when no result is found */}
       {(!rates || rates.length < 1) && isFetched && <div>No results found</div>}
 
@@ -48,14 +46,17 @@ export default function RatePage() {
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="flex h-12 w-3/5 cursor-pointer items-center justify-between rounded-lg border border-2 bg-white px-4"
+          className="border-1 flex h-16 w-3/5 cursor-pointer items-center justify-between rounded-lg border border-dashed bg-white px-4"
           onClick={() => navigateToDetails(rate.cet)}
         >
           <div>
-            {rate.cet} {rate.desc} {rate.duty}%
+            <p className="text-sm font-bold opacity-70">
+              {rate.cet} <Badge variant={"outline"}>Rate: {rate.duty}%</Badge>
+            </p>
+            <p>{rate.desc}</p>
           </div>
           <div>
-            <ChevronRightCircle size="25" className="opacity-50" />
+            <ChevronRightCircle className="h-6 w-6 opacity-40" />
           </div>
         </motion.div>
       ))}
